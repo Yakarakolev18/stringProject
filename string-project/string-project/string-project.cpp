@@ -59,27 +59,33 @@ bool generatingWords() {
 
 
 
-int count(string fullText, char ch) {
-	int wordCount = 0;
+int count(string fullText, char ch1,char ch2,char ch3) {
+	int count = 0;
 	for (int i = 0; i < fullText.size(); i++)
 	{
-		if (fullText[i] == ch)
-			wordCount++;
+		if (fullText[i] == ch1)
+			count++;
+		if (fullText[i] == ch2)
+			count++;
+		if (fullText[i] == ch3)
+			count++;
 	}
 
-	return wordCount;
-
+	return count;
 }
 
 void wordCountMenu(string fullText) {
-	int wordCount = count(fullText,' ');
+	int wordCount = count(fullText,' ',' ',' ');
 
-	cout << "The total amount of words in this text is: " << wordCount + 1<<endl;
+	cout << "The total amount of words in this text is: " << wordCount + 1 <<endl;
 	cout << endl;
 }
 
-void sentenceCountMenu() {
+void sentenceCountMenu(string fullText) {
+	int sentenceCount = count(fullText, '.','!','?');
 
+	cout << "The total amount of sentences in this text is: " << sentenceCount<< endl;
+	cout << endl;
 }
 
 void isWordInTextMenu() {
@@ -123,13 +129,11 @@ void textMenu() {
 	cout << endl;
 
 	switch (option) {
-
-	case 1:wordCountMenu(fullText);
-	/*
-	case 2:sentenceCount(); break;
-	case 3:isWordInText(); break;
-	case 4:howManyTimesIsWordInText(); break;
-	case 5:mostCommonWords(); break;*/
+	case 1:wordCountMenu(fullText); break;
+	case 2:sentenceCountMenu(fullText); break;
+	/*case 3:isWordInTextMenu(); break;
+	case 4:howManyTimesIsWordInTextMenu(); break;
+	case 5:mostCommonWordsMenu(); break;*/
 	}
 }
 
