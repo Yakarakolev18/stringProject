@@ -60,7 +60,12 @@ bool generatingWords() {
 void textMenu() {
 	int option;
 	string fullText;
-	getline(cin, fullText);
+
+	cout << "(To quit entering text, press \"Enter\")"<<endl;
+	cout << endl;
+
+	cin.ignore();
+	getline(cin, fullText,'\n');
 	cout << endl;
 
 	cout << "What do you want to know about this text? " << endl;
@@ -75,21 +80,40 @@ void textMenu() {
 
 	cout << "Enter an option: ";
 	cin >> option;
+
+	/*switch (option) {
+	case 1:wordCount(); break;
+	case 2:sentenceCount(); break;
+	case 3:isWordInText(); break;
+	case 4:howManyTimesIsWordInText(); break;
+	case 5:mostCommonWords(); break;
+	}*/
 }
 
 void gamesMenu() {
-	
+	int option;
+
 	cout << "1. Hangman" << endl;
 	cout << "2. Riddles" << endl;
+	cout << endl;
+
+	cout << "Enter the number of the game you would like to play: ";
+	cin >> option;
+
+	/*switch (option) {
+		
+	}*/
 }
 
 void mainMenu(){
 	cout << "\t\t\t    HELLO!" << endl;
+	cout << endl;
 	cout << "--------------------------------------------------------------" << endl;
 	cout << "Welcome to our newly developed program connected with strings.\nBelow, as you can see, is located our main menu from which you \ncan select and try out one or more of our program's features. \nWe hope you like it!" << endl;
 	cout << "--------------------------------------------------------------" << endl;
+	cout << endl;
 	cout << "\t\t       --------------" << endl;
-	cout << "\t\t ---  |   MAIN MENU  |  ---" << endl;
+	cout << "\t\t ---  |  MAIN  MENU  |  ---" << endl;
 	cout << "\t\t       --------------" << endl;
 	cout << endl;
 
