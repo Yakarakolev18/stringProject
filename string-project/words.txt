@@ -1,0 +1,10 @@
+mouse
+keyboard
+computer
+flashdrive
+headphones
+code
+software
+browser
+application
+
