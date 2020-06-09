@@ -60,5 +60,4 @@ bool generatingWords() {
 int main() {
 
 	srand(time(0));
-
 }
