@@ -57,27 +57,48 @@ bool generatingWords() {
 
 }
 
-int wordCount(string userInputText) {
 
-	int counter = 1;
 
-	int l = userInputText.length();
-
-	for (int i = 0; i < l; i++) {
-
-		if (userInputText[i] == ' ') {
-
-			counter++;
-		}
+int count(string fullText, char ch) {
+	int wordCount = 0;
+	for (int i = 0; i < fullText.size(); i++)
+	{
+		if (fullText[i] == ch)
+			wordCount++;
 	}
 
-	return counter;
+	return wordCount;
+
 }
+
+void wordCountMenu(string fullText) {
+	int wordCount = count(fullText,' ');
+
+	cout << "The total amount of words in this text is: " << wordCount + 1<<endl;
+	cout << endl;
+}
+
+void sentenceCountMenu() {
+
+}
+
+void isWordInTextMenu() {
+
+}
+
+void howManyTimesIsWordInTextMenu() {
+
+}
+
+void mostCommonWordsMenu() {
+
+}
+
+
 
 void textMenu() {
 
 	int option;
-	int wordsCount = 0;
 	string fullText;
 
 	cout << "(To quit entering text, press \"Enter\")"<<endl;
@@ -99,13 +120,11 @@ void textMenu() {
 
 	cout << "Enter an option: ";
 	cin >> option;
+	cout << endl;
 
 	switch (option) {
 
-	case 1:
-		wordsCount = wordCount(fullText);
-		cout <<"The total number of words in your text is: "<< wordsCount << endl;
-		break;
+	case 1:wordCountMenu(fullText);
 	/*
 	case 2:sentenceCount(); break;
 	case 3:isWordInText(); break;
