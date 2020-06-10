@@ -320,7 +320,7 @@ void textMenu() {
 void gamesMenu() {
 
 	int option;
-
+	bool hangman = false;
 	cout << "Choose the game you want to play" << endl;
 	cout << endl;
 	cout << "1. Hangman" << endl;
@@ -331,9 +331,14 @@ void gamesMenu() {
 	cout << "Your choice: ";
 	cin >> option;
 
-	/*switch (option) {
-		
-	}*/
+	switch (option) {
+	case 1: hangman = gameHangman();
+		while (hangman)
+		{
+			hangman = gameHangman();
+		}
+		break;
+	}
 }
 
 bool mainMenu(){
