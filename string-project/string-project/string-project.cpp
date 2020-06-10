@@ -59,30 +59,33 @@ bool generatingWords() {
 
 
 
-int count(string fullText, char ch1,char ch2,char ch3) {
+int counting(string fullText, char symbols[], int size) {
 	int count = 0;
 	for (int i = 0; i < fullText.size(); i++)
 	{
-		if (fullText[i] == ch1)
-			count++;
-		if (fullText[i] == ch2)
-			count++;
-		if (fullText[i] == ch3)
-			count++;
+		for (int j = 0; j < size; j++)
+		{
+			if (fullText[i] == symbols[j])
+			{
+				count++;
+			}
+		}
 	}
 
 	return count;
 }
 
 void wordCountMenu(string fullText) {
-	int wordCount = count(fullText,' ',' ',' ');
+	char symbols[] = {' '};
+	int wordCount = counting(fullText,symbols,1);
 
 	cout << "The total amount of words in this text is: " << wordCount + 1 <<endl;
 	cout << endl;
 }
 
 void sentenceCountMenu(string fullText) {
-	int sentenceCount = count(fullText, '.','!','?');
+	char symbols[] = { '.','!','?' };
+	int sentenceCount = counting(fullText, symbols,3);
 
 	cout << "The total amount of sentences in this text is: " << sentenceCount<< endl;
 	cout << endl;
