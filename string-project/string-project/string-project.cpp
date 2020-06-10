@@ -45,9 +45,9 @@ string generatingWords() {
 
 }
 
-void processWord(string wantedWord, int n, char inputSymbol, string& wantedWordHidden, vector<char>& inputLetters) {
+void processWord(string wantedWord, int numberOfLetters, char inputSymbol, string& wantedWordHidden, vector<char>& inputLetters) {
 
-	for (int i = 1; i <= n - 2; i++) {
+	for (int i = 1; i <= numberOfLetters - 2; i++) {
 
 		if (wantedWord[i] == inputSymbol) {
 
@@ -64,7 +64,7 @@ void processWord(string wantedWord, int n, char inputSymbol, string& wantedWordH
 	}
 	cout << endl;
 
-	int maximumNumberOfAttempts = n + 3 - inputLetters.size();
+	int maximumNumberOfAttempts = numberOfLetters + 3 - inputLetters.size();
 
 	if (maximumNumberOfAttempts > 0) {
 
@@ -79,13 +79,13 @@ void processWord(string wantedWord, int n, char inputSymbol, string& wantedWordH
 
 void processHiddenWord(string wantedWord, string& wantedWordHidden) {
 
-	int n = wantedWord.length();
+	int numberOfLetters = wantedWord.length();
 
-	for (int i = 1; i <= n - 2; i++) {
+	for (int i = 1; i <= numberOfLetters - 2; i++) {
 
 		wantedWordHidden[i] = '-';
 	}
-	cout << "\nYou are entitled to " << n + 3 << " attempts\n" << endl;
+	cout << "\nYou are entitled to " << numberOfLetters + 3 << " attempts\n" << endl;
 	cout << wantedWordHidden << endl;
 }
 
@@ -97,8 +97,8 @@ bool gameHangman() {
 	wantedWord = generatingWords();
 
 	wantedWordHidden = wantedWord;
-	int n = wantedWord.length();
-	int maximumNumberOfAttempts = n + 3;
+	int numberOfLetters = wantedWord.length();
+	int maximumNumberOfAttempts = numberOfLetters + 3;
 	char inputSymbol;
 
 	processHiddenWord(wantedWord, wantedWordHidden);
@@ -108,7 +108,7 @@ bool gameHangman() {
 		cout << "\nImput letter: ";
 		cin >> inputSymbol;
 		maximumNumberOfAttempts--;
-		processWord(wantedWord, n, inputSymbol, wantedWordHidden, inputLetters);
+		processWord(wantedWord, numberOfLetters, inputSymbol, wantedWordHidden, inputLetters);
 		cout << endl;
 	}
 
@@ -120,7 +120,7 @@ bool gameHangman() {
 	} else {
 
 		cout << endl;
-		cout << "You lost! The word was: " << wantedWord << endl;
+		cout << "You lost! The word was " << wantedWord <<"." << endl;
 		inputLetters.clear();
 	}
 
