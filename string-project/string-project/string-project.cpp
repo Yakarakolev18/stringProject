@@ -117,20 +117,35 @@ void mostCommonWordsMenu() {
 }
 
 void addWordsInArray(string *wordsInText, string fullText) {
-	int j = 0;
+	char symbols[] = { '.','!','?',',' };
+	int k = 0;
 	int firstLetter = 0;
 
 	for (int i = 0; i < fullText.size(); i++) {
 		if (fullText[i] == ' ') {
-			wordsInText[j] = fullText.substr(firstLetter, i-firstLetter);
-			j++;
+			wordsInText[k] = fullText.substr(firstLetter, i-firstLetter);
+			k++;
 			firstLetter = i + 1;
 		}
 	}
 
 	if (fullText[fullText.size() - 1] != ' ') {
-		wordsInText[j] = fullText.substr(firstLetter);
-	    j++;
+		wordsInText[k] = fullText.substr(firstLetter);
+	    k++;
+	}
+
+	for (int i = 0; i < k; i++){
+		for (int j = 0; j < 4; j++) {
+			if (wordsInText[i][wordsInText[i].size() - 1] == symbols[j]) {
+				wordsInText[i].erase(wordsInText[i].size() - 1);
+			}
+		}
+	}
+
+
+	for (int i = 0; i < k; i++) {
+		for (int j=0;j< wordsInText[i].size();j++)
+		wordsInText[i][j]=tolower(wordsInText[i][j]);
 	}
 
 }
