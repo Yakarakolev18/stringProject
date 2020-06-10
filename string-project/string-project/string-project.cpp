@@ -23,8 +23,6 @@ string generatingWords() {
 	int totalLines = 0;
 	string generatedWord;
 
-	int again;
-
 	randomNumber = randomInt(0, 9);
 
 	ifstream file("words.txt");
@@ -47,13 +45,13 @@ string generatingWords() {
 
 }
 
-void processWord(string wantedWord, int n, char inputSymbol, string& wantedWord1, vector<char>& inputLetters) {
+void processWord(string wantedWord, int n, char inputSymbol, string& wantedWordHidden, vector<char>& inputLetters) {
 
 	for (int i = 1; i <= n - 2; i++) {
 
 		if (wantedWord[i] == inputSymbol) {
 
-			wantedWord1[i] = inputSymbol;
+			wantedWordHidden[i] = inputSymbol;
 		}
 	}
 
@@ -71,46 +69,46 @@ void processWord(string wantedWord, int n, char inputSymbol, string& wantedWord1
 	if (maximumNumberOfAttempts > 0) {
 
 		cout << "You have " << maximumNumberOfAttempts << " attempts left\n" << endl;
-		cout << wantedWord1 << endl;
+		cout << wantedWordHidden << endl;
 
-	}
-	else {
+	} else {
 
 		cout << "You have 0 attempts left" << endl;
 	}
 }
 
-void processWordOne(string wantedWord, string& wantedWord1) {
+void processHiddenWord(string wantedWord, string& wantedWordHidden) {
 
 	int n = wantedWord.length();
 
 	for (int i = 1; i <= n - 2; i++) {
 
-		wantedWord1[i] = '-';
+		wantedWordHidden[i] = '-';
 	}
 	cout << "\nYou are entitled to " << n + 3 << " attempts\n" << endl;
-	cout << wantedWord1 << endl;
+	cout << wantedWordHidden << endl;
 }
+
 bool gameHangman() {
 
-	string wantedWord, wantedWord1;
+	string wantedWord, wantedWordHidden;
 	vector<char> inputLetters;
 	int again;
 	wantedWord = generatingWords();
 
-	wantedWord1 = wantedWord;
+	wantedWordHidden = wantedWord;
 	int n = wantedWord.length();
 	int maximumNumberOfAttempts = n + 3;
 	char inputSymbol;
 
-	processWordOne(wantedWord, wantedWord1);
+	processHiddenWord(wantedWord, wantedWordHidden);
 
-	while (wantedWord.compare(wantedWord1) != 0 && maximumNumberOfAttempts > 0) {
+	while (wantedWord.compare(wantedWordHidden) != 0 && maximumNumberOfAttempts > 0) {
 
 		cout << "\nImput letter: ";
 		cin >> inputSymbol;
 		maximumNumberOfAttempts--;
-		processWord(wantedWord, n, inputSymbol, wantedWord1, inputLetters);
+		processWord(wantedWord, n, inputSymbol, wantedWordHidden, inputLetters);
 		cout << endl;
 	}
 
@@ -119,8 +117,7 @@ bool gameHangman() {
 		cout << endl;
 		cout << "You win!" << endl;
 		inputLetters.clear();
-	}
-	else {
+	} else {
 
 		cout << endl;
 		cout << "You lost! The word was: " << wantedWord << endl;
