@@ -57,31 +57,31 @@ bool generatingWords() {
 
 }
 
-
-
 int counting(string fullText, char symbols[], int size) {
-	int count = 0;
-	int check = 0;
-	for (int i = 0; i < fullText.size(); i++)
-	{
-		for (int j = 0; j < size; j++)
-		{
-			if (fullText[i] == symbols[j])
-			{
+
+	int count = 0, check = 0;
+
+	for (int i = 0; i < fullText.size(); i++) {
+
+		for (int j = 0; j < size; j++) {
+
+			if (fullText[i] == symbols[j]) {
+
 				count++;
 			}
 		}
 	}
 
-	for (int j = 0; j < size; j++)
-	{
-		if (fullText[fullText.size() - 1] != symbols[j])
-		{
+	for (int j = 0; j < size; j++) {
+
+		if (fullText[fullText.size() - 1] != symbols[j]) {
+
 			check++;
 		}
 	}
 
 	if (check == size) {
+
 		count++;
 	}
 
@@ -89,18 +89,20 @@ int counting(string fullText, char symbols[], int size) {
 }
 
 void wordCountMenu(string fullText) {
-	char symbols[] = {' '};
-	int wordCount = counting(fullText,symbols,1);
 
-	cout << "The total amount of words in this text is: " << wordCount + 1 <<endl;
+	char symbols[] = {' '};
+	int wordCount = counting(fullText, symbols, 1);
+
+	cout << "The total amount of words in this text is: " << wordCount + 1 << endl;
 	cout << endl;
 }
 
 void sentenceCountMenu(string fullText) {
-	char symbols[] = { '.','!','?'};
-	int sentenceCount = counting(fullText, symbols,3);
 
-	cout << "The total amount of sentences in this text is: " << sentenceCount<< endl;
+	char symbols[] = { '.','!','?'};
+	int sentenceCount = counting(fullText, symbols, 3);
+
+	cout << "The total amount of sentences in this text is: " << sentenceCount << endl;
 	cout << endl;
 }
 
@@ -117,37 +119,47 @@ void mostCommonWordsMenu() {
 }
 
 void addWordsInArray(string *wordsInText, string fullText) {
+
 	char symbols[] = { '.','!','?',',' };
-	int k = 0;
+	int wordIndex = 0;
 	int firstLetter = 0;
 
 	for (int i = 0; i < fullText.size(); i++) {
 		if (fullText[i] == ' ') {
-			wordsInText[k] = fullText.substr(firstLetter, i-firstLetter);
-			k++;
+
+			int wordLength = i - firstLetter;
+			wordsInText[wordIndex] = fullText.substr(firstLetter, wordLength);
+			wordIndex++;
 			firstLetter = i + 1;
 		}
 	}
 
 	if (fullText[fullText.size() - 1] != ' ') {
-		wordsInText[k] = fullText.substr(firstLetter);
-	    k++;
+
+		wordsInText[wordIndex] = fullText.substr(firstLetter);
+	    wordIndex++;
 	}
 
-	for (int i = 0; i < k; i++){
+	for (int i = 0; i < wordIndex; i++){
+
 		for (int j = 0; j < 4; j++) {
+
 			if (wordsInText[i][wordsInText[i].size() - 1] == symbols[j]) {
+
 				wordsInText[i].erase(wordsInText[i].size() - 1);
 			}
 		}
 	}
 
 
-	for (int i = 0; i < k; i++) {
-		for (int j=0;j< wordsInText[i].size();j++)
-		wordsInText[i][j]=tolower(wordsInText[i][j]);
-	}
+	for (int i = 0; i < wordIndex; i++) {
 
+		for (int j = 0; j < wordsInText[i].size(); j++) {
+
+			wordsInText[i][j] = tolower(wordsInText[i][j]);
+		}
+
+	}
 }
 
 void textMenu() {
@@ -168,20 +180,26 @@ void textMenu() {
 	cout << "What do you want to know about this text? " << endl;
 	cout << endl;
 
-	cout << "1. How many words in total it consists of"<<endl;
-	cout << "2. How many sentences in total it contains" << endl;
-	cout << "3. If a specific word is present in the text"<<endl;
-	cout << "4. How many times a specific word is mentioned"<<endl;
-	cout << "5. Which are the most commonly used words" << endl;
+	cout << "1. Number of words"<<endl;
+	cout << "2. Number of sentences" << endl;
+	cout << "3. Does it contain a specific word"<<endl;
+	cout << "4. How many times is a specific word mentioned"<<endl;
+	cout << "5. Most commonly used words" << endl;
 	cout << endl;
 
-	cout << "Enter an option: ";
+	cout << "Your choice: ";
 	cin >> option;
 	cout << endl;
 
 	switch (option) {
-	case 1:wordCountMenu(fullText); break;
-	case 2:sentenceCountMenu(fullText); break;
+
+		case 1:
+			wordCountMenu(fullText);
+			break;
+
+		case 2:
+			sentenceCountMenu(fullText);
+			break;
 	/*case 3:isWordInTextMenu(); break;
 	case 4:howManyTimesIsWordInTextMenu(); break;
 	case 5:mostCommonWordsMenu(); break;*/
@@ -189,13 +207,15 @@ void textMenu() {
 }
 
 void gamesMenu() {
+
 	int option;
 
+	cout << "Choose the game you want to play" << endl;
 	cout << "1. Hangman" << endl;
 	cout << "2. Riddles" << endl;
 	cout << endl;
 
-	cout << "Enter the number of the game you would like to play: ";
+	cout << "Your choice: ";
 	cin >> option;
 
 	/*switch (option) {
