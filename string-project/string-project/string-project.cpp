@@ -116,12 +116,30 @@ void mostCommonWordsMenu() {
 
 }
 
+void addWordsInArray(string *wordsInText, string fullText) {
+	int j = 0;
+	int firstLetter = 0;
 
+	for (int i = 0; i < fullText.size(); i++) {
+		if (fullText[i] == ' ') {
+			wordsInText[j] = fullText.substr(firstLetter, i-firstLetter);
+			j++;
+			firstLetter = i + 1;
+		}
+	}
+
+	if (fullText[fullText.size() - 1] != ' ') {
+		wordsInText[j] = fullText.substr(firstLetter);
+	    j++;
+	}
+
+}
 
 void textMenu() {
 
 	int option;
 	string fullText;
+	string wordsInText[100];
 
 	cout << "(To quit entering text, press \"Enter\")"<<endl;
 	cout << endl;
@@ -129,6 +147,8 @@ void textMenu() {
 	cin.ignore();
 	getline(cin, fullText,'\n');
 	cout << endl;
+
+	addWordsInArray(wordsInText,fullText);
 
 	cout << "What do you want to know about this text? " << endl;
 	cout << endl;
