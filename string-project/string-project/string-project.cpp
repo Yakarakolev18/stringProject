@@ -155,13 +155,7 @@ void gamesMenu() {
 	}*/
 }
 
-void mainMenu(){
-	cout << "\t\t\t    HELLO!" << endl;
-	cout << endl;
-	cout << "--------------------------------------------------------------" << endl;
-	cout << "Welcome to our newly developed program connected with strings.\nBelow, as you can see, is located our main menu from which you \ncan select and try out one or more of our program's features. \nWe hope you like it!" << endl;
-	cout << "--------------------------------------------------------------" << endl;
-	cout << endl;
+void mainMenu(bool &continueMainMenu){
 	cout << "\t\t       --------------" << endl;
 	cout << "\t\t ---  |  MAIN  MENU  |  ---" << endl;
 	cout << "\t\t       --------------" << endl;
@@ -181,13 +175,26 @@ void mainMenu(){
 	switch (option) {
 	case 1:textMenu(); break;
 	case 2:gamesMenu(); break;
-	case 3:exit(0); break;
+	case 3:
+		continueMainMenu = 1;
+		exit(0);
+		break;
 	}
 }
 
 int main() {
 	srand(time(0));
+	bool continueMainMenu = 0;
 
-	mainMenu();
+	cout << "\t\t\t    HELLO!" << endl;
+	cout << endl;
+	cout << "--------------------------------------------------------------" << endl;
+	cout << "Welcome to our newly developed program connected with strings.\nBelow, as you can see, is located our main menu from which you \ncan select and try out one or more of our program's features. \nWe hope you like it!" << endl;
+	cout << "--------------------------------------------------------------" << endl;
+	cout << endl;
+	
+	do {
+		mainMenu(continueMainMenu);
+	} while (continueMainMenu == 0);
 	system("PAUSE");
 }
