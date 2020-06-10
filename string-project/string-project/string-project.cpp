@@ -12,7 +12,7 @@ long int randomInt(int min, int max) {
 	return randNum;
 }
 
-bool generatingWords() {
+string generatingWords() {
 
 	int randomNumber;
 
@@ -21,6 +21,7 @@ bool generatingWords() {
 
 	vector <string> lines;
 	int totalLines = 0;
+	string generatedWord;
 
 	int again;
 
@@ -29,8 +30,7 @@ bool generatingWords() {
 	ifstream file("words.txt");
 	if (!file.is_open()) {
 
-		cout << "Error opening file!";
-		return false;
+		return "Error opening file!";
 	}
 
 	while (getline(file, line)) {
@@ -39,23 +39,14 @@ bool generatingWords() {
 		lines.push_back(line);
 	}
 
-	cout << lines[randomNumber] << endl;
+	generatedWord = lines[randomNumber];
 
 	file.close();
 
-	cin >> again;
-
-	switch (again) {
-
-		case 1: return true;
-			break;
-
-		case 2:
-			return false;
-			break;
-	}
+	return generatedWord;
 
 }
+
 void processWord(string wantedWord, int n, char inputSymbol, string& wantedWord1, vector<char>& inputLetters) {
 
 	for (int i = 1; i <= n - 2; i++) {
@@ -105,7 +96,7 @@ bool gameHangman() {
 	string wantedWord, wantedWord1;
 	vector<char> inputLetters;
 	int again;
-	wantedWord = "Hel";
+	wantedWord = generatingWords();
 
 	wantedWord1 = wantedWord;
 	int n = wantedWord.length();
@@ -270,6 +261,7 @@ void addWordsInArray(string *wordsInText, string fullText) {
 	}
 }
 
+
 void textMenu() {
 
 	int option;
@@ -312,10 +304,10 @@ void textMenu() {
 	case 4:howManyTimesIsWordInTextMenu(); break;
 	case 5:mostCommonWordsMenu(); break;
 		case 6:
-			break;*/
+			break;*/ 
 	}
-
 }
+
 
 void gamesMenu() {
 
