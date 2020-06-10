@@ -179,12 +179,12 @@ void textMenu() {
 
 	cout << "What do you want to know about this text? " << endl;
 	cout << endl;
-
 	cout << "1. Number of words"<<endl;
 	cout << "2. Number of sentences" << endl;
 	cout << "3. Does it contain a specific word"<<endl;
 	cout << "4. How many times is a specific word mentioned"<<endl;
 	cout << "5. Most commonly used words" << endl;
+	//cout << "6. Return back to the main menu" << endl;
 	cout << endl;
 
 	cout << "Your choice: ";
@@ -202,8 +202,11 @@ void textMenu() {
 			break;
 	/*case 3:isWordInTextMenu(); break;
 	case 4:howManyTimesIsWordInTextMenu(); break;
-	case 5:mostCommonWordsMenu(); break;*/
+	case 5:mostCommonWordsMenu(); break;
+		case 6:
+			break;*/
 	}
+
 }
 
 void gamesMenu() {
@@ -211,8 +214,10 @@ void gamesMenu() {
 	int option;
 
 	cout << "Choose the game you want to play" << endl;
+	cout << endl;
 	cout << "1. Hangman" << endl;
 	cout << "2. Riddles" << endl;
+	cout << "3. Return to the main menu" << endl;
 	cout << endl;
 
 	cout << "Your choice: ";
@@ -223,46 +228,78 @@ void gamesMenu() {
 	}*/
 }
 
-void mainMenu(bool &continueMainMenu){
-	cout << "\t\t       --------------" << endl;
-	cout << "\t\t ---  |  MAIN  MENU  |  ---" << endl;
-	cout << "\t\t       --------------" << endl;
-	cout << endl;
+bool mainMenu(){
 
 	int option;
+	string dashes, lessDashes;
+
+	dashes.assign(14, '-');
+
+	lessDashes = dashes.substr(0, 3);
+
+	cout << "\t\t       " << dashes << endl;
+	cout << "\t\t " << lessDashes << "  |  MAIN  MENU  |  " << lessDashes << endl;
+	cout << "\t\t       " << dashes << endl;
+	cout << endl;
 
 	cout << "1. Input a text and get analysis about it" << endl;
 	cout << "2. Play games" << endl;
 	cout << "3. Exit" << endl;
-
 	cout << endl;
+
 	cout << "Enter an option: ";
 	cin >> option;
 	cout << endl;
 
 	switch (option) {
-	case 1:textMenu(); break;
-	case 2:gamesMenu(); break;
-	case 3:
-		continueMainMenu = 1;
-		exit(0);
-		break;
+
+		case 1:
+			textMenu();
+			break;
+
+		case 2:
+			gamesMenu(); 
+			break;
+
+		case 3:
+			cout << "Thanks for using our program. See you soon!" << endl;
+			return false;
+			break;
+
+		default:
+			cout << "There seems to be a problem with your input. "
+				"Please try again." << endl;
+			cout << endl;
+			break;
 	}
+
+	return true;
 }
 
 int main() {
-	srand(time(0));
-	bool continueMainMenu = 0;
 
+	srand(time(0));
+	bool showMainMenu = 0;
+	
+	string dashes;
+
+	dashes.assign(62, '-');
+
+	cout << endl;
 	cout << "\t\t\t    HELLO!" << endl;
 	cout << endl;
-	cout << "--------------------------------------------------------------" << endl;
-	cout << "Welcome to our newly developed program connected with strings.\nBelow, as you can see, is located our main menu from which you \ncan select and try out one or more of our program's features. \nWe hope you like it!" << endl;
-	cout << "--------------------------------------------------------------" << endl;
+	cout << dashes << endl;
+	cout << "Welcome to our newly developed program connected to strings."
+		"\nBelow, as you can see, is located our main menu from which you \n"
+		"can select and try out one or more of our program's features. \nWe hope you like it!" << endl;
+	cout << dashes << endl;
 	cout << endl;
-	
+
 	do {
-		mainMenu(continueMainMenu);
-	} while (continueMainMenu == 0);
-	system("PAUSE");
+		
+		showMainMenu = mainMenu();
+
+	} while (showMainMenu);
+
+	
 }
