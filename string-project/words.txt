@@ -7,4 +7,20 @@ code
 software
 browser
 application
+robotics
+internet
+digital
+processor
+hardware
+design
+technology
+cyberscience
+television
+robot
+binary
+charger
+battery
+cable
+
+
 

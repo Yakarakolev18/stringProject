@@ -23,8 +23,6 @@ string generatingWords() {
 	int totalLines = 0;
 	string generatedWord;
 
-	randomNumber = randomInt(0, 9);
-
 	ifstream file("words.txt");
 	if (!file.is_open()) {
 
@@ -36,6 +34,8 @@ string generatingWords() {
 		totalLines++;
 		lines.push_back(line);
 	}
+
+	randomNumber = randomInt(0, lines.size());
 
 	generatedWord = lines[randomNumber];
 
