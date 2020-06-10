@@ -100,6 +100,70 @@ void processWordOne(string wantedWord, string& wantedWord1) {
 	cout << "\nYou are entitled to " << n + 3 << " attempts\n" << endl;
 	cout << wantedWord1 << endl;
 }
+bool gameHangman() {
+
+	string wantedWord, wantedWord1;
+	vector<char> inputLetters;
+	int again;
+	wantedWord = "Hel";
+
+	wantedWord1 = wantedWord;
+	int n = wantedWord.length();
+	int maximumNumberOfAttempts = n + 3;
+	char inputSymbol;
+
+	processWordOne(wantedWord, wantedWord1);
+
+	while (wantedWord.compare(wantedWord1) != 0 && maximumNumberOfAttempts > 0) {
+
+		cout << "\nImput letter: ";
+		cin >> inputSymbol;
+		maximumNumberOfAttempts--;
+		processWord(wantedWord, n, inputSymbol, wantedWord1, inputLetters);
+		cout << endl;
+	}
+
+	if (maximumNumberOfAttempts > 0) {
+
+		cout << endl;
+		cout << "You win!" << endl;
+		inputLetters.clear();
+	}
+	else {
+
+		cout << endl;
+		cout << "You lost! The word was: " << wantedWord << endl;
+		inputLetters.clear();
+	}
+
+	cout << endl;
+	cout << "Would you like to play again?" << endl;
+	cout << "1. Yes, let's go!" << endl;
+	cout << "2. No, thanks." << endl;
+	cout << endl;
+
+	cout << "Your choice: ";
+	cin >> again;
+
+	switch (again) {
+
+	case 1:
+		return true;
+		break;
+
+	case 2:
+		return false;
+		break;
+
+	default:
+		cout << "There seems to be a problem with your input."
+			"Please try again!" << endl;
+		break;
+	}
+
+	return true;
+
+}
 
 int counting(string fullText, char symbols[], int size) {
 
