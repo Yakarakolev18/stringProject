@@ -56,6 +56,50 @@ bool generatingWords() {
 	}
 
 }
+void processWord(string wantedWord, int n, char inputSymbol, string& wantedWord1, vector<char>& inputLetters) {
+
+	for (int i = 1; i <= n - 2; i++) {
+
+		if (wantedWord[i] == inputSymbol) {
+
+			wantedWord1[i] = inputSymbol;
+		}
+	}
+
+	inputLetters.push_back(inputSymbol);
+	cout << "\nYour entered letters: ";
+
+	for (int i = 0; i < inputLetters.size(); i++) {
+
+		cout << inputLetters[i] << " ";
+	}
+	cout << endl;
+
+	int maximumNumberOfAttempts = n + 3 - inputLetters.size();
+
+	if (maximumNumberOfAttempts > 0) {
+
+		cout << "You have " << maximumNumberOfAttempts << " attempts left\n" << endl;
+		cout << wantedWord1 << endl;
+
+	}
+	else {
+
+		cout << "You have 0 attempts left" << endl;
+	}
+}
+
+void processWordOne(string wantedWord, string& wantedWord1) {
+
+	int n = wantedWord.length();
+
+	for (int i = 1; i <= n - 2; i++) {
+
+		wantedWord1[i] = '-';
+	}
+	cout << "\nYou are entitled to " << n + 3 << " attempts\n" << endl;
+	cout << wantedWord1 << endl;
+}
 
 int counting(string fullText, char symbols[], int size) {
 
