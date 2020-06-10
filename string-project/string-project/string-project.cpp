@@ -276,11 +276,9 @@ bool mainMenu(){
 	return true;
 }
 
-int main() {
+void greetingsMessage() {
 
-	srand(time(0));
-	bool showMainMenu = 0;
-	
+
 	string dashes;
 
 	dashes.assign(62, '-');
@@ -295,11 +293,18 @@ int main() {
 	cout << dashes << endl;
 	cout << endl;
 
+}
+
+int main() {
+
+	srand(time(0));
+	bool showMainMenu = 0;
+
+	greetingsMessage();
+
 	do {
 		
 		showMainMenu = mainMenu();
 
 	} while (showMainMenu);
-
-	
 }
