@@ -5,10 +5,24 @@
 #include <vector>
 using namespace std;
 
-string riddle1 = {"test"};
-
+string riddle1 = {"This is riddle 1"};
+string riddle2 = { "This is riddle 2" };
+string riddle3 = { "This is riddle 3" };
+string riddle4 = { "This is riddle 4" };
+string riddle5 = { "This is riddle 5" };
+string riddle6 = { "This is riddle 6" };
+string riddle7 = { "This is riddle 7" };
+string riddle8 = { "This is riddle 8" };
+string riddle9 = { "This is riddle 9" };
+string riddle10 = { "This is riddle 10" };
 
 int riddle_numb = 0;
+
+
+
+string riddle_answ = { " " };
+
+string player_answ = { " " };
 
 struct WORD {
 	string word = "";
@@ -500,27 +514,40 @@ void textMenu() {
 void generateRiddle(int riddle_num) {
 	
 	int r = rand();
-	long int randNum = r % (1 - 1) + 1;
+	long int randNum = r % (2 - 1) + 1;
 
 
 	riddle_num = randNum;
 
 	riddle_numb = riddle_num;
-
-	
-
-	
 }
 
 void printRiddle() {
-	switch (riddle_numb) {
-	case 1:
-		cout << riddle1 << endl;
-		break;
 
+	switch (riddle_numb)
+	{
+		case 1: 
 
+			riddle_answ = { "riddle1" };
 
+			cout <<endl<< riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
 	}
+	
 }
 
 
@@ -571,7 +598,8 @@ void gamesMenu() {
 
 			case 2: 
 				generateRiddle(riddle_numb);
-				cout << riddle_numb << endl;
+
+				printRiddle();
 				break;
 
 			case 3:
