@@ -467,7 +467,7 @@ void gamesMenu() {
 				hangman = gameHangman();
 			}
 			break;
-		case 6:
+		case 3:
 			continueMenu = 1;
 			break;
 		}
