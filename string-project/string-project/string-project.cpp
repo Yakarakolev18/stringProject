@@ -8,6 +8,7 @@ using namespace std;
 struct WORD {
 	string word = "";
 	int count = 0;
+	bool marked = false;
 };
 
 //returns random integer in a range
@@ -314,12 +315,55 @@ void howManyTimesIsWordInTextMenu(WORD* wordsInText, int wordCount) {
 	cin >> wordForCount;
 	cout << endl;
 
-	cout << "The word \"" << wordForCount << "\" is present " << specificWordCount(wordsInText, wordCount, wordForCount) << " times in the text."<<endl;
+	cout << "The word \"" << wordForCount << "\" is present " << specificWordCount(wordsInText, wordCount, wordForCount) << " time/s in the text."<<endl;
 	cout << endl;
 }
 
-void mostCommonWordsMenu() {
+void countEachWordInText(WORD* wordsInText, int wordCount) {
 
+	for (int i = 0; i < wordCount; i++) {
+		
+		if (wordsInText[i].marked == false) {
+			wordsInText[i].count++;
+			for (int j = i+1; j < wordCount; j++) {
+				if (wordsInText[j].marked == false) {
+					if (wordsInText[i].word== wordsInText[j].word) {
+						wordsInText[i].count++;
+						wordsInText[j].marked = true;
+					}
+				}
+			}
+		}
+	}
+
+}
+
+void eachWordCountMenu(WORD* wordsInText, int wordCount) {
+	for (int i = 0; i < wordCount; i++) {
+		if (wordsInText[i].marked == false) {
+			cout << "\"" << wordsInText[i].word << "\" is used " << wordsInText[i].count << " time/s in the text" << endl;
+		}
+	}
+	cout << endl;
+}
+
+void sortByCount(WORD* wordsInText, int wordCount) {
+	for (int i = 0; i < wordCount - 1; i++) {
+		for (int j = 0; j < wordCount - i - 1; j++) {
+			if (wordsInText[j].count < wordsInText[j + 1].count) {
+				swap(wordsInText[j], wordsInText[j + 1]);
+			}
+		}
+	}
+}
+
+void mostCommonWordsMenu(WORD* wordsInText, int wordCount) {
+	sortByCount(wordsInText, wordCount);
+	cout << "The three most common words in the text are: "<<endl;
+	for (int i = 0; i < 3; i++)
+		cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
+
+	cout << endl;
 }
 
 
@@ -340,7 +384,7 @@ void textMenu() {
 
 	int wordCount = addWordsInArray(wordsInText, fullText);
 
-
+	countEachWordInText(wordsInText, wordCount);
 
 	bool continueMenu = 0;
 
@@ -351,8 +395,9 @@ void textMenu() {
 		cout << "2. Number of sentences" << endl;
 		cout << "3. Does it contain a specific word" << endl;
 		cout << "4. How many times is a specific word mentioned" << endl;
-		cout << "5. Most commonly used words" << endl;
-		cout << "6. Return back to the main menu" << endl;
+		cout << "5. How many times each word in the text is used" << endl;
+		cout << "6. Most commonly used words" << endl;
+		cout << "7. Return back to the main menu" << endl;
 		cout << endl;
 
 
@@ -370,17 +415,21 @@ void textMenu() {
 			sentenceCountMenu(fullText);
 			break;
 		case 3:
-			isWordInTextMenu(wordsInText,wordCount);
+			isWordInTextMenu(wordsInText, wordCount);
 			break;
 		case 4:
 			howManyTimesIsWordInTextMenu(wordsInText, wordCount);
 			break;
-		//case 5:mostCommonWordsMenu(); break;
+		case 5:
+			eachWordCountMenu(wordsInText, wordCount);
+			break;
 		case 6:
+			mostCommonWordsMenu(wordsInText, wordCount);
+			break;
+		case 7:
 			continueMenu = 1;
 			break;
 		};
-
 	};
 }
 
