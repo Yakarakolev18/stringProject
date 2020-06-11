@@ -10,46 +10,56 @@ struct WORD {
 	int count = 0;
 };
 
+//returns random integer in a range
 long int randomInt(int min, int max) {
 
 	int r = rand();
 	long int randNum = r % (max - min) + min;
+
 	return randNum;
 }
 
+//generates a random word from a file by using the random number
 string generatingWords() {
 
 	int randomNumber;
-
-	string line;
-	string myText;
-
-	vector <string> lines;
-	int totalLines = 0;
 	string generatedWord;
 
+	//vector to store the words in
+	vector <string> lines;
+	int totalLines = 0;
+	string line;
+
+	//opens the file
 	ifstream file("words.txt");
 	if (!file.is_open()) {
 
+		//if the file can't be opened
 		return "Error opening file!";
 	}
 
+	//counts all the lines in the file
 	while (getline(file, line)) {
 
 		totalLines++;
 		lines.push_back(line);
 	}
 
+	//generates the random number
 	randomNumber = randomInt(0, lines.size());
 
+	//puts the chosen word in a variable
 	generatedWord = lines[randomNumber];
 
+	//closes the file
 	file.close();
 
+	//returns the generated word
 	return generatedWord;
 
 }
 
+//counts the left attempts and used letters and shows them
 void processWord(string wantedWord, int numberOfLetters, char inputSymbol, string& wantedWordHidden, vector<char>& inputLetters) {
 
 	for (int i = 1; i <= numberOfLetters - 2; i++) {
@@ -60,29 +70,35 @@ void processWord(string wantedWord, int numberOfLetters, char inputSymbol, strin
 		}
 	}
 
+	//vector which contains the used letters
 	inputLetters.push_back(inputSymbol);
 	cout << "\nYour entered letters: ";
 
+	//shows the used letters
 	for (int i = 0; i < inputLetters.size(); i++) {
 
 		cout << inputLetters[i] << " ";
 	}
 	cout << endl;
 
+	//calculates the attempts needed for a word to be guessed
 	int maximumNumberOfAttempts = numberOfLetters + 3 - inputLetters.size();
 
+	//shows the number of left attempts
 	if (maximumNumberOfAttempts > 0) {
 
+		//if there are some available
 		cout << "You have " << maximumNumberOfAttempts << " attempts left\n" << endl;
 		cout << wantedWordHidden << endl;
 
 	}
 	else {
-
+		//if there are none available
 		cout << "You have 0 attempts left" << endl;
 	}
 }
 
+//exchanges letters to dashes to hide the word
 void processHiddenWord(string wantedWord, string& wantedWordHidden) {
 
 	int numberOfLetters = wantedWord.length();
@@ -91,15 +107,20 @@ void processHiddenWord(string wantedWord, string& wantedWordHidden) {
 
 		wantedWordHidden[i] = '-';
 	}
+
+	//shows max number of attempts
 	cout << "\nYou are entitled to " << numberOfLetters + 3 << " attempts\n" << endl;
 	cout << wantedWordHidden << endl;
 }
 
+//hangman game
 bool gameHangman() {
 
 	string wantedWord, wantedWordHidden;
 	vector<char> inputLetters;
 	int again;
+	
+	//gets the word
 	wantedWord = generatingWords();
 
 	wantedWordHidden = wantedWord;
@@ -107,30 +128,34 @@ bool gameHangman() {
 	int maximumNumberOfAttempts = numberOfLetters + 3;
 	char inputSymbol;
 
+	//hides the letters
 	processHiddenWord(wantedWord, wantedWordHidden);
 
 	while (wantedWord.compare(wantedWordHidden) != 0 && maximumNumberOfAttempts > 0) {
 
-		cout << "\nImput letter: ";
+		cout << "\nInput letter: ";
 		cin >> inputSymbol;
 		maximumNumberOfAttempts--;
 		processWord(wantedWord, numberOfLetters, inputSymbol, wantedWordHidden, inputLetters);
 		cout << endl;
 	}
 
+	//results
 	if (maximumNumberOfAttempts > 0) {
 
+		//if the word is guessed
 		cout << endl;
 		cout << "You win!" << endl;
 		inputLetters.clear();
 	}
 	else {
-
+		//if the word is not guessed
 		cout << endl;
 		cout << "You lost! The word was " << wantedWord << "." << endl;
 		inputLetters.clear();
 	}
 
+	//asks if another round is wanted
 	cout << endl;
 	cout << "Would you like to play again?" << endl;
 	cout << "1. Yes, let's go!" << endl;
@@ -143,10 +168,12 @@ bool gameHangman() {
 	switch (again) {
 
 	case 1:
+		//if it is wanted
 		return true;
 		break;
 
 	case 2:
+		//if it isn't wanted
 		return false;
 		break;
 
