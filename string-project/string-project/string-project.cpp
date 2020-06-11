@@ -5,6 +5,11 @@
 #include <vector>
 using namespace std;
 
+string riddle1 = {"test"};
+
+
+int riddle_numb = 0;
+
 struct WORD {
 	string word = "";
 	int count = 0;
@@ -405,9 +410,6 @@ void mostCommonWordsMenu(WORD* wordsInText, int wordCount) {
 	cout << endl;
 }
 
-
-
-
 void textMenu() {
 
 	int option;
@@ -494,6 +496,35 @@ void textMenu() {
 	};
 }
 
+
+void generateRiddle(int riddle_num) {
+	
+	int r = rand();
+	long int randNum = r % (1 - 1) + 1;
+
+
+	riddle_num = randNum;
+
+	riddle_numb = riddle_num;
+
+	
+
+	
+}
+
+void printRiddle() {
+	switch (riddle_numb) {
+	case 1:
+		cout << riddle1 << endl;
+		break;
+
+
+
+	}
+}
+
+
+
 void gamesMenu() {
 
 	int option;
@@ -526,6 +557,7 @@ void gamesMenu() {
 			option = readInt(message);
 		}
 		cout << endl;
+		
 
 		switch (option) {
 
@@ -535,6 +567,11 @@ void gamesMenu() {
 
 				hangman = gameHangman();
 				}
+				break;
+
+			case 2: 
+				generateRiddle(riddle_numb);
+				cout << riddle_numb << endl;
 				break;
 
 			case 3:
@@ -629,9 +666,12 @@ void greetingsMessage() {
 
 }
 
+
+
+
 int main() {
 
-	srand(time(0));
+	 srand(time(0));
 	bool showMainMenu = 0;
 
 	greetingsMessage();
@@ -640,5 +680,7 @@ int main() {
 
 		showMainMenu = mainMenu();
 
-	} while (showMainMenu);
+	} while (showMainMenu); 
+
+	
 }
