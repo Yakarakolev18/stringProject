@@ -18,7 +18,6 @@ string generatingWords() {
 
 	string line;
 	string myText;
-
 	vector <string> lines;
 	int totalLines = 0;
 	string generatedWord;
@@ -30,7 +29,7 @@ string generatingWords() {
 	}
 
 	while (getline(file, line)) {
-
+		
 		totalLines++;
 		lines.push_back(line);
 	}
