@@ -302,6 +302,10 @@ void isWordInTextMenu(WORD *wordsInText, int wordCount) {
 	cin >> wordForCheck;
 	cout << endl;
 
+	for (int i = 0; i < wordForCheck.size(); i++) {
+		wordForCheck[i] = tolower(wordForCheck[i]);
+	}
+
 	if (specificWordCount(wordsInText, wordCount, wordForCheck) > 0)
 		cout << "Yes, \"" << wordForCheck << "\" is present in the text!" << endl;
 	else
@@ -314,6 +318,10 @@ void howManyTimesIsWordInTextMenu(WORD* wordsInText, int wordCount) {
 	cout << "Enter the word you want to know how many times is present in the text: ";
 	cin >> wordForCount;
 	cout << endl;
+
+	for (int i = 0; i < wordForCount.size(); i++) {
+		wordForCount[i] = tolower(wordForCount[i]);
+	}
 
 	cout << "The word \"" << wordForCount << "\" is present " << specificWordCount(wordsInText, wordCount, wordForCount) << " time/s in the text."<<endl;
 	cout << endl;
