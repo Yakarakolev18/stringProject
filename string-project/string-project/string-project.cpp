@@ -5,19 +5,18 @@
 #include <vector>
 using namespace std;
 
-string riddle1 = {"This is riddle 1"};
-string riddle2 = { "This is riddle 2" };
-string riddle3 = { "This is riddle 3" };
-string riddle4 = { "This is riddle 4" };
-string riddle5 = { "This is riddle 5" };
-string riddle6 = { "This is riddle 6" };
-string riddle7 = { "This is riddle 7" };
-string riddle8 = { "This is riddle 8" };
-string riddle9 = { "This is riddle 9" };
-string riddle10 = { "This is riddle 10" };
+string riddle1 = {"What has to be broken before you can use it?"}; //egg
+string riddle2 = { "It goes up and down the stairs without moving." }; //carpet
+string riddle3 = { "Give me food and I will live, Give me water, and I will die." }; //fire
+string riddle4 = { "What is black and white and is red all over?" }; //newspaper
+string riddle5 = { "I run, yet I have no legs. What am I?" }; //nose
+string riddle6 = { "What has hands, but is not flesh, bone or blood?" }; //clock
+string riddle7 = { "I can be written, I can be spoken, I can be exposed, I can be broken." }; //news
+string riddle8 = { "The more there is the less you see." }; //darkness
+string riddle9 = { "You hear me once, you heard me again,and then I die until I am called again." }; //echo
+string riddle10 = { "White and thin, red within, with a nail at the end. What is it?" }; //finger
 
 int riddle_numb = 0;
-
 
 
 string riddle_answ = { " " };
@@ -528,7 +527,7 @@ void printRiddle() {
 	{
 		case 1: 
 
-			riddle_answ = { "riddle1" };
+			riddle_answ = { "egg" };
 
 			cout <<endl<< riddle1 << endl;
 			cout << "What is the answer?: ";
@@ -546,6 +545,189 @@ void printRiddle() {
 				cout << "The correct answer is: " << riddle_answ << endl << endl;
 				break;
 			}
+		case 2:
+
+			riddle_answ = { "carpet" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 3:
+
+			riddle_answ = { "fire" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 4:
+
+			riddle_answ = { "newpaper" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 5:
+
+			riddle_answ = { "nose" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 6:
+
+			riddle_answ = { "clock" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 7:
+
+			riddle_answ = { "news" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 8:
+
+			riddle_answ = { "darkness" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 9:
+
+			riddle_answ = { "echo" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		case 10:
+
+			riddle_answ = { "finger" };
+
+			cout << endl << riddle1 << endl;
+			cout << "What is the answer?: ";
+			cin >> player_answ;
+
+			if (player_answ == riddle_answ)
+			{
+				cout << endl << "You win!" << endl;
+				break;
+			}
+
+			else
+			{
+				cout << "You are wrong!" << endl;
+				cout << "The correct answer is: " << riddle_answ << endl << endl;
+				break;
+			}
+		default: 
+			cout << "Invalid option! Please try again!" << endl;
+			break;
 	}
 	
 }
