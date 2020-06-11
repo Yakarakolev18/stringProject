@@ -283,19 +283,16 @@ void sentenceCountMenu(string fullText) {
 	cout << endl;
 }
 
-bool isWordInText(WORD *wordsInText, int wordCount, string wordForCheck) {
-	int check = 0;
+int specificWordCount(WORD *wordsInText, int wordCount, string wordForCheck) {
+	int searchedWordCount = 0;
 
 	for (int i = 0; i < wordCount; i++)
 	{
 		if (wordsInText[i].word == wordForCheck)
-			check++;
+			searchedWordCount++;
 	}
 	
-	if (check>0)
-		return true;
-	else
-		return false;
+	return searchedWordCount;
 }
 
 void isWordInTextMenu(WORD *wordsInText, int wordCount) {
@@ -304,15 +301,21 @@ void isWordInTextMenu(WORD *wordsInText, int wordCount) {
 	cin >> wordForCheck;
 	cout << endl;
 
-	if (isWordInText(wordsInText, wordCount, wordForCheck) == true)
+	if (specificWordCount(wordsInText, wordCount, wordForCheck) > 0)
 		cout << "Yes, \"" << wordForCheck << "\" is present in the text!" << endl;
 	else
 		cout << "No, \"" << wordForCheck << "\" is not present in the text!" << endl;
 	cout << endl;
 }
 
-void howManyTimesIsWordInTextMenu() {
+void howManyTimesIsWordInTextMenu(WORD* wordsInText, int wordCount) {
+	string wordForCount;
+	cout << "Enter the word you want to know how many times is present in the text: ";
+	cin >> wordForCount;
+	cout << endl;
 
+	cout << "The word \"" << wordForCount << "\" is present " << specificWordCount(wordsInText, wordCount, wordForCount) << " times in the text."<<endl;
+	cout << endl;
 }
 
 void mostCommonWordsMenu() {
@@ -369,8 +372,10 @@ void textMenu() {
 		case 3:
 			isWordInTextMenu(wordsInText,wordCount);
 			break;
-			/*case 4:howManyTimesIsWordInTextMenu(); break;
-			case 5:mostCommonWordsMenu(); break;*/
+		case 4:
+			howManyTimesIsWordInTextMenu(wordsInText, wordCount);
+			break;
+		//case 5:mostCommonWordsMenu(); break;
 		case 6:
 			continueMenu = 1;
 			break;
