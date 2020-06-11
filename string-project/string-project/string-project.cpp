@@ -20,6 +20,27 @@ long int randomInt(int min, int max) {
 	return randNum;
 }
 
+
+int readInt(string message) {
+
+	int number;
+
+	//while loop until the value entered is an integer
+	while (!( cin >> number )) {
+
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+		cout << endl;
+		cout << "There seems to be a problem with your input. " << endl;
+		cout << "Please keep in mind that you should enter a number." << endl;
+		cout << endl;
+		//shows different messages depending on the function it is used in
+		cout << message;
+	}
+
+	return number;
+}
+
 //generates a random word from a file by using the random number
 string generatingWords() {
 
@@ -121,6 +142,8 @@ bool gameHangman() {
 	vector<char> inputLetters;
 	int again;
 	
+	string message;
+
 	//gets the word
 	wantedWord = generatingWords();
 
@@ -163,9 +186,21 @@ bool gameHangman() {
 	cout << "2. No, thanks." << endl;
 	cout << endl;
 
-	cout << "Your choice: ";
-	cin >> again;
+	message = "Your choice: ";
+	cout << message;
 
+	//checks if the input is acceptable
+	again = readInt(message);
+
+	while (again != 1 and again != 2) {
+
+		cout << "There seems to be a problem with your input. ";
+		cout << "Please try again." << endl;
+		cout << endl;
+		cout << message;
+		again = readInt(message);
+	}
+	
 	switch (again) {
 
 	case 1:
@@ -187,10 +222,6 @@ bool gameHangman() {
 	return true;
 
 }
-
-
-
-
 
 int addWordsInArray(WORD* wordsInText, string fullText) {
 
@@ -382,6 +413,7 @@ void textMenu() {
 	int option;
 	string fullText;
 	WORD wordsInText[100];
+	string message;
 
 	cout << "(To quit entering text, press \"Enter\")" << endl;
 	cout << endl;
@@ -408,48 +440,70 @@ void textMenu() {
 		cout << "7. Return back to the main menu" << endl;
 		cout << endl;
 
+		message = "Your choice: ";
+		cout << message;
 
-		cout << "Your choice: ";
-		cin >> option;
+		//checks if the input is acceptable
+		option = readInt(message);
+
+		while (option < 1 and option > 7) {
+
+			cout << "There seems to be a problem with your input. ";
+			cout << "Please try again." << endl;
+			cout << endl;
+			cout << message;
+			option = readInt(message);
+		}
 		cout << endl;
 
 		switch (option) {
 
-		case 1:
+			case 1:
 			wordCountMenu(wordCount);
 			break;
 
-		case 2:
+			case 2:
 			sentenceCountMenu(fullText);
 			break;
-		case 3:
+
+			case 3:
 			isWordInTextMenu(wordsInText, wordCount);
 			break;
-		case 4:
+
+			case 4:
 			howManyTimesIsWordInTextMenu(wordsInText, wordCount);
 			break;
-		case 5:
+
+			case 5:
 			eachWordCountMenu(wordsInText, wordCount);
 			break;
-		case 6:
+
+			case 6:
 			mostCommonWordsMenu(wordsInText, wordCount);
 			break;
-		case 7:
+
+			case 7:
 			continueMenu = 1;
 			break;
-		};
+
+			default:
+				cout << "There seems to be a problem with your input. Please try again." << endl;
+				cout << endl;
+				break;
+		}
 	};
 }
-
 
 void gamesMenu() {
 
 	int option;
 	bool hangman = false;
+	string message;
 
 	bool continueMenu = 0;
 
 	while (continueMenu == 0) {
+
 		cout << "Choose the game you want to play" << endl;
 		cout << endl;
 		cout << "1. Hangman" << endl;
@@ -457,19 +511,40 @@ void gamesMenu() {
 		cout << "3. Return to the main menu" << endl;
 		cout << endl;
 
-		cout << "Your choice: ";
-		cin >> option;
+		message = "Your choice: ";
+		cout << message;
+
+		//checks if the input is acceptable
+		option = readInt(message);
+
+		while (option < 1 and option > 3) {
+
+			cout << "There seems to be a problem with your input. ";
+			cout << "Please try again." << endl;
+			cout << endl;
+			cout << message;
+			option = readInt(message);
+		}
+		cout << endl;
 
 		switch (option) {
-		case 1: hangman = gameHangman();
-			while (hangman)
-			{
+
+			case 1: 
 				hangman = gameHangman();
-			}
-			break;
-		case 3:
-			continueMenu = 1;
-			break;
+				while (hangman) {
+
+				hangman = gameHangman();
+				}
+				break;
+
+			case 3:
+				continueMenu = 1;
+				break;
+
+			default:
+				cout << "There seems to be a problem with your input. Please try again!" << endl;
+				cout << endl;
+				break;
 		}
 	};
 }
@@ -478,6 +553,7 @@ bool mainMenu() {
 
 	int option;
 	string dashes, lessDashes;
+	string message;
 
 	dashes.assign(14, '-');
 
@@ -493,8 +569,20 @@ bool mainMenu() {
 	cout << "3. Exit" << endl;
 	cout << endl;
 
-	cout << "Enter an option: ";
-	cin >> option;
+	message = "Your choice: ";
+	cout << message;
+
+	//checks if the input is acceptable
+	option = readInt(message);
+
+	while (option < 1 and option > 3) {
+
+		cout << "There seems to be a problem with your input. ";
+		cout << "Please try again." << endl;
+		cout << endl;
+		cout << message;
+		option = readInt(message);
+	}
 	cout << endl;
 
 	switch (option) {
