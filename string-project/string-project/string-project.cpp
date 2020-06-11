@@ -274,15 +274,19 @@ void textMenu() {
 
 	addWordsInArray(wordsInText,fullText);
 
-	cout << "What do you want to know about this text? " << endl;
-	cout << endl;
-	cout << "1. Number of words"<<endl;
-	cout << "2. Number of sentences" << endl;
-	cout << "3. Does it contain a specific word"<<endl;
-	cout << "4. How many times is a specific word mentioned"<<endl;
-	cout << "5. Most commonly used words" << endl;
-	//cout << "6. Return back to the main menu" << endl;
-	cout << endl;
+	bool continueMenu = 0;
+
+	while (continueMenu == 0) {
+		cout << "What do you want to know about this text? " << endl;
+		cout << endl;
+		cout << "1. Number of words" << endl;
+		cout << "2. Number of sentences" << endl;
+		cout << "3. Does it contain a specific word" << endl;
+		cout << "4. How many times is a specific word mentioned" << endl;
+		cout << "5. Most commonly used words" << endl;
+		cout << "6. Return back to the main menu" << endl;
+		cout << endl;
+	
 
 	cout << "Your choice: ";
 	cin >> option;
@@ -290,19 +294,22 @@ void textMenu() {
 
 	switch (option) {
 
-		case 1:
-			wordCountMenu(fullText);
-			break;
+	case 1:
+		wordCountMenu(fullText);
+		break;
 
-		case 2:
-			sentenceCountMenu(fullText);
-			break;
-	/*case 3:isWordInTextMenu(); break;
-	case 4:howManyTimesIsWordInTextMenu(); break;
-	case 5:mostCommonWordsMenu(); break;
-		case 6:
-			break;*/ 
-	}
+	case 2:
+		sentenceCountMenu(fullText);
+		break;
+		/*case 3:isWordInTextMenu(); break;
+		case 4:howManyTimesIsWordInTextMenu(); break;
+		case 5:mostCommonWordsMenu(); break;*/
+	case 6:
+		continueMenu = 1;
+		break;
+	};
+
+	};
 }
 
 
