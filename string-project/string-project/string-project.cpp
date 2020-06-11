@@ -5,6 +5,11 @@
 #include <vector>
 using namespace std;
 
+struct WORD {
+	string word="";
+	int count=0;
+};
+
 long int randomInt(int min, int max) {
 
 	int r = rand();
@@ -214,7 +219,7 @@ void mostCommonWordsMenu() {
 
 }
 
-void addWordsInArray(string *wordsInText, string fullText) {
+void addWordsInArray(WORD *wordsInText, string fullText) {
 
 	char symbols[] = { '.','!','?',',' };
 	int wordIndex = 0;
@@ -224,7 +229,7 @@ void addWordsInArray(string *wordsInText, string fullText) {
 		if (fullText[i] == ' ') {
 
 			int wordLength = i - firstLetter;
-			wordsInText[wordIndex] = fullText.substr(firstLetter, wordLength);
+			wordsInText[wordIndex].word = fullText.substr(firstLetter, wordLength);
 			wordIndex++;
 			firstLetter = i + 1;
 		}
@@ -232,7 +237,7 @@ void addWordsInArray(string *wordsInText, string fullText) {
 
 	if (fullText[fullText.size() - 1] != ' ') {
 
-		wordsInText[wordIndex] = fullText.substr(firstLetter);
+		wordsInText[wordIndex].word = fullText.substr(firstLetter);
 	    wordIndex++;
 	}
 
@@ -240,9 +245,9 @@ void addWordsInArray(string *wordsInText, string fullText) {
 
 		for (int j = 0; j < 4; j++) {
 
-			if (wordsInText[i][wordsInText[i].size() - 1] == symbols[j]) {
+			if (wordsInText[i].word[wordsInText[i].word.size() - 1] == symbols[j]) {
 
-				wordsInText[i].erase(wordsInText[i].size() - 1);
+				wordsInText[i].word.erase(wordsInText[i].word.size() - 1);
 			}
 		}
 	}
@@ -250,9 +255,9 @@ void addWordsInArray(string *wordsInText, string fullText) {
 
 	for (int i = 0; i < wordIndex; i++) {
 
-		for (int j = 0; j < wordsInText[i].size(); j++) {
+		for (int j = 0; j < wordsInText[i].word.size(); j++) {
 
-			wordsInText[i][j] = tolower(wordsInText[i][j]);
+			wordsInText[i].word[j] = tolower(wordsInText[i].word[j]);
 		}
 
 	}
@@ -263,7 +268,7 @@ void textMenu() {
 
 	int option;
 	string fullText;
-	string wordsInText[100];
+	WORD wordsInText[100];
 
 	cout << "(To quit entering text, press \"Enter\")"<<endl;
 	cout << endl;
