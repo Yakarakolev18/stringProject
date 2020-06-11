@@ -317,24 +317,32 @@ void gamesMenu() {
 
 	int option;
 	bool hangman = false;
-	cout << "Choose the game you want to play" << endl;
-	cout << endl;
-	cout << "1. Hangman" << endl;
-	cout << "2. Riddles" << endl;
-	cout << "3. Return to the main menu" << endl;
-	cout << endl;
 
-	cout << "Your choice: ";
-	cin >> option;
+	bool continueMenu = 0;
 
-	switch (option) {
-	case 1: hangman = gameHangman();
-		while (hangman)
-		{
-			hangman = gameHangman();
+	while (continueMenu == 0) {
+		cout << "Choose the game you want to play" << endl;
+		cout << endl;
+		cout << "1. Hangman" << endl;
+		cout << "2. Riddles" << endl;
+		cout << "3. Return to the main menu" << endl;
+		cout << endl;
+
+		cout << "Your choice: ";
+		cin >> option;
+
+		switch (option) {
+		case 1: hangman = gameHangman();
+			while (hangman)
+			{
+				hangman = gameHangman();
+			}
+			break;
+		case 6:
+			continueMenu = 1;
+			break;
 		}
-		break;
-	}
+	};
 }
 
 bool mainMenu(){
