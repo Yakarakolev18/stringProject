@@ -12,10 +12,6 @@ string generatingWords();
 
 void processHiddenWord(string, string&);
 
-string generatingWords();
-
-void processHiddenWord(string, string&);
-
 int addWordsInArray(WORD*, string);
 
 int counting(string, char[], int);
