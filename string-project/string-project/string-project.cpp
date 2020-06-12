@@ -5,12 +5,15 @@
 #include <vector>
 using namespace std;
 
+//for the text analysis functions
 struct WORD {
+
 	string word = "";
 	int count = 0;
 	bool marked = false;
 };
 
+//for the riddles game
 struct RIDDLE {
 
 	int index = 0;
@@ -26,7 +29,7 @@ long int randomInt(int min, int max) {
 	return randNum;
 }
 
-
+//checks if the input is an integer
 int readInt(string message) {
 
 	int number;
@@ -141,11 +144,13 @@ void processHiddenWord(string wantedWord, string& wantedWordHidden) {
 	cout << wantedWordHidden << endl;
 }
 
+//asks if more rounds of a game are wanted
 bool playAgain() {
 
 
 	string message;
 	int again;
+
 	//asks if another round is wanted
 	cout << endl;
 	cout << "Would you like to play again?" << endl;
@@ -156,7 +161,6 @@ bool playAgain() {
 	message = "Your choice: ";
 	cout << message;
 	
-
 	//checks if the input is acceptable
 	again = readInt(message);
 
@@ -235,11 +239,11 @@ bool gameHangman() {
 		inputLetters.clear();
 	}
 
+	//asks for another round
 	again = playAgain();
 
 	return again;
 }
-
 
 //extracts separate words from the text string and puts them in the array of structures "wordsInText"
 int addWordsInArray(WORD* wordsInText, string fullText) {
@@ -291,7 +295,6 @@ int addWordsInArray(WORD* wordsInText, string fullText) {
 	//returns the size of array "wordsInText"
 	return wordIndex;
 }
-
 
 //counts something (e.g. sentences) by given characters
 int counting(string fullText, char symbols[], int size) {
@@ -551,6 +554,7 @@ void textMenu() {
 	};
 }
 
+//generates random riddle from a file
 RIDDLE generateRiddles() {
 
 	RIDDLE riddle;
@@ -559,28 +563,34 @@ RIDDLE generateRiddles() {
 	int totalLinesRiddles = 0;
 	string line;
 
+	//checks if the file can be opened
 	ifstream file("riddles.txt");
 	if (!file.is_open()) {
 
-		riddle.index = 0;
+		riddle.index = -1;
 		riddle.sentence = "There was a problem with the file.";
 	}
 
+	//counts the lines and pushes the content into a vector
 	while (getline(file, line)) {
 
 		totalLinesRiddles++;
 		lines.push_back(line);
 	}
 
+	//gets a random number
 	riddle.index = randomInt(0, totalLinesRiddles);
 
+	//gets the riddle on that index
 	riddle.sentence = lines[riddle.index];
 
 	file.close();
 
+	//returns the riddle's index and text
 	return riddle;
 }
 
+//generates the answer corresponding to the random chosen riddle
 string generateRiddleAnswers(RIDDLE riddle) {
 
 	vector <string> lines;
@@ -588,36 +598,44 @@ string generateRiddleAnswers(RIDDLE riddle) {
 	string line;
 	string generatedAnswer;
 
+	//checks if the file can be opened
 	ifstream file("answers.txt");
 	if (!file.is_open()) {
 
 		return "Error opening file!";
 	}
 
+	//counts the number of lines and pushes their content in a vector
 	while (getline(file, line)) {
 
 		totalLinesAnswers++;
 		lines.push_back(line);
 	}
 
+	//gets the word on the same index as the riddle
 	generatedAnswer = lines[riddle.index];
 
 	file.close();
 
+	//returns the answer
 	return generatedAnswer;
 }
 
+//checks if the riddle answer is the same as the user's input
 bool isCorrect(string answer, string userInput) {
 
 	if (userInput.compare(answer) == 0) {
 
+		//if it is
 		return true;
 	} else {
 
+		//if it is not
 		return false;
 	}
 }
 
+//menu function for the riddles game
 bool riddlesMenu() {
 
 	string answer, userInput;
@@ -626,34 +644,43 @@ bool riddlesMenu() {
 
 	RIDDLE riddle;
 
+	//gets a riddle form the function for that
 	riddle = generateRiddles();
 
+	//gets the answer from the fuction for that
 	answer = generateRiddleAnswers(riddle);
 
+	//shows the 'question'
 	cout << riddle.sentence << endl;
 
+	//asks the user for the answer
 	cout << "Answer: ";
 	cin >> userInput;
 	cout << endl;
 	cout << endl;
 
+	//for case insensitive comparing
 	for (int i = 0; i < userInput.length(); i++) {
 
 		userInput[i] = tolower(userInput[i]);
 	}
 
+	//checks if the answer is correct
 	magic = isCorrect(answer, userInput);
 
 	if (magic) {
 
+		//if it is
 		cout << "Yes, you are correct!" << endl;
 	} else {
 
+		//if it is not
 		cout << "No, the answer is " << answer << endl;
 	}
 
 	cout << endl;
 
+	//asks for another round
 	again = playAgain();
 
 	return again;
@@ -694,7 +721,6 @@ void gamesMenu() {
 		}
 		cout << endl;
 		
-
 		switch (option) {
 
 			case 1: 
