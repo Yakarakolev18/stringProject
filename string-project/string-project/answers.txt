@@ -1,0 +1,10 @@
+egg
+carpet
+fire
+newspaper
+nose
+clock
+news
+darkness
+echo
+finger

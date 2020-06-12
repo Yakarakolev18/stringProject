@@ -5,28 +5,16 @@
 #include <vector>
 using namespace std;
 
-string riddle1 = {"What has to be broken before you can use it?"}; //egg
-string riddle2 = { "It goes up and down the stairs without moving." }; //carpet
-string riddle3 = { "Give me food and I will live, Give me water, and I will die." }; //fire
-string riddle4 = { "What is black and white and is red all over?" }; //newspaper
-string riddle5 = { "I run, yet I have no legs. What am I?" }; //nose
-string riddle6 = { "What has hands, but is not flesh, bone or blood?" }; //clock
-string riddle7 = { "I can be written, I can be spoken, I can be exposed, I can be broken." }; //news
-string riddle8 = { "The more there is the less you see." }; //darkness
-string riddle9 = { "You hear me once, you heard me again,and then I die until I am called again." }; //echo
-string riddle10 = { "White and thin, red within, with a nail at the end. What is it?" }; //finger
-
-int riddle_numb = 0;
-
-
-string riddle_answ = { " " };
-
-string player_answ = { " " };
-
 struct WORD {
 	string word = "";
 	int count = 0;
 	bool marked = false;
+};
+
+struct RIDDLE {
+
+	int index = 0;
+	string sentence = " ";
 };
 
 //returns random integer in a range
@@ -509,235 +497,138 @@ void textMenu() {
 	};
 }
 
+RIDDLE generateRiddles() {
 
-void generateRiddle(int riddle_num) {
-	
-	int r = rand();
-	long int randNum = r % (2 - 1) + 1;
+	RIDDLE riddle;
 
+	vector <string> lines;
+	int totalLinesRiddles = 0;
+	string line;
 
-	riddle_num = randNum;
+	ifstream file("riddles.txt");
+	if (!file.is_open()) {
 
-	riddle_numb = riddle_num;
+		riddle.index = 0;
+		riddle.sentence = "There was a problem with the file.";
+	}
+
+	while (getline(file, line)) {
+
+		totalLinesRiddles++;
+		lines.push_back(line);
+	}
+
+	riddle.index = randomInt(0, totalLinesRiddles);
+
+	riddle.sentence = lines[riddle.index];
+
+	file.close();
+
+	return riddle;
 }
 
-void printRiddle() {
+string generateRiddleAnswers(RIDDLE riddle) {
 
-	switch (riddle_numb)
-	{
-		case 1: 
+	vector <string> lines;
+	int totalLinesAnswers = 0;
+	string line;
+	string generatedAnswer;
 
-			riddle_answ = { "egg" };
+	ifstream file("answers.txt");
+	if (!file.is_open()) {
 
-			cout <<endl<< riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
+		return "Error opening file!";
+	}
 
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
+	while (getline(file, line)) {
 
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
+		totalLinesAnswers++;
+		lines.push_back(line);
+	}
+
+	generatedAnswer = lines[riddle.index];
+
+	file.close();
+
+	return generatedAnswer;
+}
+
+bool isCorrect(string answer, string userInput) {
+
+	if (userInput.compare(answer) == 0) {
+
+		return true;
+	} else {
+
+		return false;
+	}
+}
+
+bool riddlesMenu() {
+
+	string answer, userInput;
+
+	bool magic = false;
+
+	int again;
+
+	RIDDLE riddle;
+
+	riddle = generateRiddles();
+
+	answer = generateRiddleAnswers(riddle);
+
+	cout << riddle.sentence << endl;
+
+	cout << "Answer: ";
+	cin >> userInput;
+	cout << endl;
+
+	for (int i = 0; i < userInput.length(); i++) {
+
+		userInput[i] = tolower(userInput[i]);
+	}
+
+	magic = isCorrect(answer, userInput);
+
+	if (magic) {
+
+		cout << "Yes, you are correct!" << endl;
+	} else {
+
+		cout << "No, the answer is " << answer << endl;
+	}
+
+	cout << endl;
+	cout << "Would you like to play again?" << endl;
+	cout << "1. Yes, let's go!" << endl;
+	cout << "2. No, thanks" << endl;
+	cout << endl;
+	cout << "Your choice: ";
+	cin >> again;
+	cout << endl;
+
+	switch (again) {
+
+		case 1:
+			return true;
+			break;
+
 		case 2:
+			return false;
+			break;
 
-			riddle_answ = { "carpet" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 3:
-
-			riddle_answ = { "fire" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 4:
-
-			riddle_answ = { "newpaper" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 5:
-
-			riddle_answ = { "nose" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 6:
-
-			riddle_answ = { "clock" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 7:
-
-			riddle_answ = { "news" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 8:
-
-			riddle_answ = { "darkness" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 9:
-
-			riddle_answ = { "echo" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		case 10:
-
-			riddle_answ = { "finger" };
-
-			cout << endl << riddle1 << endl;
-			cout << "What is the answer?: ";
-			cin >> player_answ;
-
-			if (player_answ == riddle_answ)
-			{
-				cout << endl << "You win!" << endl;
-				break;
-			}
-
-			else
-			{
-				cout << "You are wrong!" << endl;
-				cout << "The correct answer is: " << riddle_answ << endl << endl;
-				break;
-			}
-		default: 
-			cout << "Invalid option! Please try again!" << endl;
+		default:
+			cout << "There seems to be a problem." << endl;
 			break;
 	}
-	
+
+	return true;
 }
-
-
-
 void gamesMenu() {
 
 	int option;
-	bool hangman = false;
+	bool hangman = false, riddles = false;
 	string message;
 
 	bool continueMenu = 0;
@@ -779,9 +670,11 @@ void gamesMenu() {
 				break;
 
 			case 2: 
-				generateRiddle(riddle_numb);
+				riddles = riddlesMenu();
+				while (riddles) {
 
-				printRiddle();
+					riddles = riddlesMenu();
+				}
 				break;
 
 			case 3:
@@ -875,8 +768,6 @@ void greetingsMessage() {
 	cout << endl;
 
 }
-
-
 
 
 int main() {
