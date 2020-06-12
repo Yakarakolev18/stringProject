@@ -796,6 +796,7 @@ void gamesMenu() {
 	};
 }
 
+//the main menu of the program
 bool mainMenu() {
 
 	int option;
@@ -857,6 +858,7 @@ bool mainMenu() {
 	return true;
 }
 
+//shows the greeting message at the beginning
 void greetingsMessage() {
 
 	string dashes;
@@ -874,13 +876,16 @@ void greetingsMessage() {
 	cout << endl;
 }
 
+//main function
 int main() {
 
 	srand(time(0));
 	bool showMainMenu = 0;
 
+	//calls the greetings message
 	greetingsMessage();
 
+	//shows the main menu
 	do {
 
 		showMainMenu = mainMenu();
