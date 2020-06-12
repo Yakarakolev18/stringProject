@@ -155,6 +155,7 @@ bool playAgain() {
 
 	message = "Your choice: ";
 	cout << message;
+	
 
 	//checks if the input is acceptable
 	again = readInt(message);
@@ -590,6 +591,7 @@ bool riddlesMenu() {
 
 	cout << "Answer: ";
 	cin >> userInput;
+	cout << endl;
 	cout << endl;
 
 	for (int i = 0; i < userInput.length(); i++) {
