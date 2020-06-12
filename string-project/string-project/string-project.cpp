@@ -683,7 +683,7 @@ bool riddlesMenu() {
 
 	string answer, userInput;
 
-	bool magic = false, again = false;
+	bool isTheAnswerCorrect = false, again = false;
 
 	RIDDLE riddle;
 
@@ -711,9 +711,9 @@ bool riddlesMenu() {
 	}
 
 	//checks if the answer is correct
-	magic = isCorrect(answer, userInput);
+	isTheAnswerCorrect = isCorrect(answer, userInput);
 
-	if (magic) {
+	if (isTheAnswerCorrect) {
 
 		//if it is
 		cout << "Yes, you are correct!" << endl;
