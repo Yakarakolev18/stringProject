@@ -87,7 +87,6 @@ string generatingWords() {
 
 	//returns the generated word
 	return generatedWord;
-
 }
 
 //counts the left attempts and used letters and shows them
@@ -147,13 +146,13 @@ void processHiddenWord(string wantedWord, string& wantedWordHidden) {
 //asks if more rounds of a game are wanted
 bool playAgain() {
 
-
 	string message;
 	int again;
 
 	//asks if another round is wanted
 	cout << endl;
 	cout << "Would you like to play again?" << endl;
+	cout << endl;
 	cout << "1. Yes, let's go!" << endl;
 	cout << "2. No, thanks." << endl;
 	cout << endl;
@@ -191,8 +190,9 @@ bool playAgain() {
 			break;
 	}
 
-	return true;
+	cout << endl;
 
+	return true;
 }
 
 //hangman game
@@ -231,8 +231,8 @@ bool gameHangman() {
 		cout << endl;
 		cout << "You win!" << endl;
 		inputLetters.clear();
-	}
-	else {
+	} else {
+
 		//if the word is not guessed
 		cout << endl;
 		cout << "You lost! The word was " << wantedWord << "." << endl;
@@ -245,7 +245,8 @@ bool gameHangman() {
 	return again;
 }
 
-//extracts separate words from the text string and puts them in the array of structures "wordsInText"
+/*extracts separate words from the text string and
+puts them in the array of structures "wordsInText"*/
 int addWordsInArray(WORD* wordsInText, string fullText) {
 
 	char symbols[] = { '.','!','?',',' };
@@ -254,6 +255,7 @@ int addWordsInArray(WORD* wordsInText, string fullText) {
 
 	//loop for putting words in the array
 	for (int i = 0; i < fullText.size(); i++) {
+
 		if (fullText[i] == ' ') {
 
 			int wordLength = i - firstLetter;
@@ -289,7 +291,6 @@ int addWordsInArray(WORD* wordsInText, string fullText) {
 
 			wordsInText[i].word[j] = tolower(wordsInText[i].word[j]);
 		}
-
 	}
 
 	//returns the size of array "wordsInText"
@@ -301,7 +302,8 @@ int counting(string fullText, char symbols[], int size) {
 
 	int count = 0, check = 0;
 
-	//counts how many times the characters from the array symbols[] are present in the string
+	/*counts how many times the characters from the array symbols[]
+	are present in the string*/
 	for (int i = 0; i < fullText.size(); i++) {
 
 		for (int j = 0; j < size; j++) {
@@ -313,7 +315,8 @@ int counting(string fullText, char symbols[], int size) {
 		}
 	}
 
-	//checks if the last element of the string is equal to each of the characters from the array symbols[] and if not, it adds 1 to "check"  
+	/*checks if the last element of the string is equal to each of the characters
+	//from the array symbols[] and if not, it adds 1 to "check" */
 	for (int j = 0; j < size; j++) {
 
 		if (fullText[fullText.size() - 1] != symbols[j]) {
@@ -322,7 +325,8 @@ int counting(string fullText, char symbols[], int size) {
 		}
 	}
 
-	//checks if the last element from the string is different from all the symbols and if it is, it adds 1 to "count"
+	/*checks if the last element from the string is different
+	from all the symbols and if it is, it adds 1 to "count"*/
 	if (check == size) {
 
 		count++;
@@ -334,6 +338,7 @@ int counting(string fullText, char symbols[], int size) {
 
 //prints the number of words used in the text
 void wordCountMenu(int wordCount) {
+
 	cout << "The total amount of words in this text is: " << wordCount << endl;
 	cout << endl;
 }
@@ -350,10 +355,11 @@ void sentenceCountMenu(string fullText) {
 
 //counts how many times a given  word is present in the text
 int specificWordCount(WORD *wordsInText, int wordCount, string wordForCheck) {
+
 	int searchedWordCount = 0;
 
-	for (int i = 0; i < wordCount; i++)
-	{
+	for (int i = 0; i < wordCount; i++) {
+
 		if (wordsInText[i].word == wordForCheck)
 			searchedWordCount++;
 	}
@@ -363,34 +369,46 @@ int specificWordCount(WORD *wordsInText, int wordCount, string wordForCheck) {
 
 //prints if a word (entered by the user) is present in the text or not
 void isWordInTextMenu(WORD *wordsInText, int wordCount) {
+
 	string wordForCheck;
+
 	cout << "Enter the word you want to search for: ";
 	cin >> wordForCheck;
 	cout << endl;
 
+	//converts to lower case for case insensitivity when checking
 	for (int i = 0; i < wordForCheck.size(); i++) {
+
 		wordForCheck[i] = tolower(wordForCheck[i]);
 	}
 
-	if (specificWordCount(wordsInText, wordCount, wordForCheck) > 0)
+	if (specificWordCount(wordsInText, wordCount, wordForCheck) > 0) {
+
 		cout << "Yes, \"" << wordForCheck << "\" is present in the text!" << endl;
-	else
+	} else {
+
 		cout << "No, \"" << wordForCheck << "\" is not present in the text!" << endl;
+	}
+		
 	cout << endl;
 }
 
 //prints how many times a word (entered by the user) is present in the text
 void howManyTimesIsWordInTextMenu(WORD* wordsInText, int wordCount) {
+
 	string wordForCount;
+
 	cout << "Enter the word you want to know how many times is present in the text: ";
 	cin >> wordForCount;
 	cout << endl;
 
 	for (int i = 0; i < wordForCount.size(); i++) {
+
 		wordForCount[i] = tolower(wordForCount[i]);
 	}
 
-	cout << "The word \"" << wordForCount << "\" is present " << specificWordCount(wordsInText, wordCount, wordForCount) << " time/s in the text."<<endl;
+	cout << "The word \"" << wordForCount << "\" is present ";
+	cout << specificWordCount(wordsInText, wordCount, wordForCount) << " time/s in the text." << endl;
 	cout << endl;
 }
 
@@ -400,10 +418,15 @@ void countEachWordInText(WORD* wordsInText, int wordCount) {
 	for (int i = 0; i < wordCount; i++) {
 		
 		if (wordsInText[i].marked == false) {
+
 			wordsInText[i].count++;
+
 			for (int j = i+1; j < wordCount; j++) {
+
 				if (wordsInText[j].marked == false) {
+
 					if (wordsInText[i].word== wordsInText[j].word) {
+
 						wordsInText[i].count++;
 						wordsInText[j].marked = true;
 					}
@@ -411,24 +434,32 @@ void countEachWordInText(WORD* wordsInText, int wordCount) {
 			}
 		}
 	}
-
 }
 
 //prints how many times each word in the text is present
 void eachWordCountMenu(WORD* wordsInText, int wordCount) {
+
 	for (int i = 0; i < wordCount; i++) {
+
 		if (wordsInText[i].marked == false) {
-			cout << "\"" << wordsInText[i].word << "\" is used " << wordsInText[i].count << " time/s in the text" << endl;
+
+			cout << "\"" << wordsInText[i].word << "\" is used ";
+			cout << wordsInText[i].count << " time/s in the text" << endl;
 		}
 	}
+
 	cout << endl;
 }
 
 //sorts the elements in the array "wordsInText" from most to least common word in the text
 void sortByCount(WORD* wordsInText, int wordCount) {
+
 	for (int i = 0; i < wordCount - 1; i++) {
+
 		for (int j = 0; j < wordCount - i - 1; j++) {
+
 			if (wordsInText[j].count < wordsInText[j + 1].count) {
+
 				swap(wordsInText[j], wordsInText[j + 1]);
 			}
 		}
@@ -437,12 +468,15 @@ void sortByCount(WORD* wordsInText, int wordCount) {
 
 //prints the most common words in the text
 void mostCommonWordsMenu(WORD* wordsInText, int wordCount) {
+
 	sortByCount(wordsInText, wordCount);
 
 	int uniqueWordsCount = 0;
 
 	for (int i = 0; i < wordCount; i++) {
+
 		if (wordsInText[i].marked == false) {
+
 			uniqueWordsCount++;
 		}
 	}
@@ -451,16 +485,25 @@ void mostCommonWordsMenu(WORD* wordsInText, int wordCount) {
 
 	//checks how many different words there are and chooses how many most common words to print
 	if (uniqueWordsCount == 1) {
-		for (int i = 0; i < 1; i++)
-			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
-	}
-	else if (uniqueWordsCount == 2) {
-		for (int i = 0; i < 2; i++)
-			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
-	}
-	else {
-		for (int i = 0; i < 3; i++)
-			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
+		for (int i = 0; i < 1; i++) {
+
+			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (";
+			cout << wordsInText[i].count << " time/s) " << endl;
+		}
+	} else if (uniqueWordsCount == 2) {
+
+		for (int i = 0; i < 2; i++) {
+
+			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (";
+			cout << wordsInText[i].count << " time/s) " << endl;
+		}
+	} else {
+
+		for (int i = 0; i < 3; i++) {
+
+			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (";
+			cout << wordsInText[i].count << " time/s) " << endl;
+		}
 	}
 
 	cout << endl;
@@ -519,32 +562,32 @@ void textMenu() {
 		switch (option) {
 
 			case 1:
-			wordCountMenu(wordCount);
-			break;
+				wordCountMenu(wordCount);
+				break;
 
 			case 2:
-			sentenceCountMenu(fullText);
-			break;
+				sentenceCountMenu(fullText);
+				break;
 
 			case 3:
-			isWordInTextMenu(wordsInText, wordCount);
-			break;
+				isWordInTextMenu(wordsInText, wordCount);
+				break;
 
 			case 4:
-			howManyTimesIsWordInTextMenu(wordsInText, wordCount);
-			break;
+				howManyTimesIsWordInTextMenu(wordsInText, wordCount);
+				break;
 
 			case 5:
-			eachWordCountMenu(wordsInText, wordCount);
-			break;
+				eachWordCountMenu(wordsInText, wordCount);
+				break;
 
 			case 6:
-			mostCommonWordsMenu(wordsInText, wordCount);
-			break;
+				mostCommonWordsMenu(wordsInText, wordCount);
+				break;
 
 			case 7:
-			continueMenu = 1;
-			break;
+				continueMenu = 1;
+				break;
 
 			default:
 				cout << "There seems to be a problem with your input. Please try again." << endl;
@@ -650,8 +693,10 @@ bool riddlesMenu() {
 	//gets the answer from the fuction for that
 	answer = generateRiddleAnswers(riddle);
 
+	cout << endl;
 	//shows the 'question'
 	cout << riddle.sentence << endl;
+	cout << endl;
 
 	//asks the user for the answer
 	cout << "Answer: ";
@@ -789,31 +834,30 @@ bool mainMenu() {
 
 	switch (option) {
 
-	case 1:
-		textMenu();
-		break;
+		case 1:
+			textMenu();
+			break;
 
-	case 2:
-		gamesMenu();
-		break;
+		case 2:
+			gamesMenu();
+			break;
 
-	case 3:
-		cout << "Thanks for using our program. See you soon!" << endl;
-		return false;
-		break;
+		case 3:
+			cout << "Thanks for using our program. See you soon!" << endl;
+			return false;
+			break;
 
-	default:
-		cout << "There seems to be a problem with your input. "
-			"Please try again." << endl;
-		cout << endl;
-		break;
+		default:
+			cout << "There seems to be a problem with your input. "
+				"Please try again." << endl;
+			cout << endl;
+			break;
 	}
 
 	return true;
 }
 
 void greetingsMessage() {
-
 
 	string dashes;
 
@@ -828,13 +872,11 @@ void greetingsMessage() {
 		"can select and try out one or more of our program's features. \nWe hope you like it!" << endl;
 	cout << dashes << endl;
 	cout << endl;
-
 }
-
 
 int main() {
 
-	 srand(time(0));
+	srand(time(0));
 	bool showMainMenu = 0;
 
 	greetingsMessage();
@@ -844,6 +886,4 @@ int main() {
 		showMainMenu = mainMenu();
 
 	} while (showMainMenu); 
-
-	
 }
