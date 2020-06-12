@@ -141,12 +141,61 @@ void processHiddenWord(string wantedWord, string& wantedWordHidden) {
 	cout << wantedWordHidden << endl;
 }
 
+bool playAgain() {
+
+
+	string message;
+	int again;
+	//asks if another round is wanted
+	cout << endl;
+	cout << "Would you like to play again?" << endl;
+	cout << "1. Yes, let's go!" << endl;
+	cout << "2. No, thanks." << endl;
+	cout << endl;
+
+	message = "Your choice: ";
+	cout << message;
+
+	//checks if the input is acceptable
+	again = readInt(message);
+
+	while (again != 1 and again != 2) {
+
+		cout << "There seems to be a problem with your input. ";
+		cout << "Please try again." << endl;
+		cout << endl;
+		cout << message;
+		again = readInt(message);
+	}
+
+	switch (again) {
+
+		case 1:
+			//if it is wanted
+			return true;
+			break;
+
+		case 2:
+			//if it isn't wanted
+			return false;
+			break;
+
+		default:
+			cout << "There seems to be a problem with your input."
+				"Please try again!" << endl;
+			break;
+	}
+
+	return true;
+
+}
+
 //hangman game
 bool gameHangman() {
 
 	string wantedWord, wantedWordHidden;
 	vector<char> inputLetters;
-	int again;
+	bool again;
 	
 	string message;
 
@@ -185,48 +234,9 @@ bool gameHangman() {
 		inputLetters.clear();
 	}
 
-	//asks if another round is wanted
-	cout << endl;
-	cout << "Would you like to play again?" << endl;
-	cout << "1. Yes, let's go!" << endl;
-	cout << "2. No, thanks." << endl;
-	cout << endl;
+	again = playAgain();
 
-	message = "Your choice: ";
-	cout << message;
-
-	//checks if the input is acceptable
-	again = readInt(message);
-
-	while (again != 1 and again != 2) {
-
-		cout << "There seems to be a problem with your input. ";
-		cout << "Please try again." << endl;
-		cout << endl;
-		cout << message;
-		again = readInt(message);
-	}
-	
-	switch (again) {
-
-	case 1:
-		//if it is wanted
-		return true;
-		break;
-
-	case 2:
-		//if it isn't wanted
-		return false;
-		break;
-
-	default:
-		cout << "There seems to be a problem with your input."
-			"Please try again!" << endl;
-		break;
-	}
-
-	return true;
-
+	return again;
 }
 
 int addWordsInArray(WORD* wordsInText, string fullText) {
@@ -568,9 +578,7 @@ bool riddlesMenu() {
 
 	string answer, userInput;
 
-	bool magic = false;
-
-	int again;
+	bool magic = false, again = false;
 
 	RIDDLE riddle;
 
@@ -600,31 +608,12 @@ bool riddlesMenu() {
 	}
 
 	cout << endl;
-	cout << "Would you like to play again?" << endl;
-	cout << "1. Yes, let's go!" << endl;
-	cout << "2. No, thanks" << endl;
-	cout << endl;
-	cout << "Your choice: ";
-	cin >> again;
-	cout << endl;
 
-	switch (again) {
+	again = playAgain();
 
-		case 1:
-			return true;
-			break;
-
-		case 2:
-			return false;
-			break;
-
-		default:
-			cout << "There seems to be a problem." << endl;
-			break;
-	}
-
-	return true;
+	return again;
 }
+
 void gamesMenu() {
 
 	int option;
