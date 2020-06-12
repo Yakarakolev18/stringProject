@@ -240,12 +240,15 @@ bool gameHangman() {
 	return again;
 }
 
+
+//extracts separate words from the text string and puts them in the array of structures "wordsInText"
 int addWordsInArray(WORD* wordsInText, string fullText) {
 
 	char symbols[] = { '.','!','?',',' };
 	int wordIndex = 0;
 	int firstLetter = 0;
 
+	//loop for putting words in the array
 	for (int i = 0; i < fullText.size(); i++) {
 		if (fullText[i] == ' ') {
 
@@ -256,12 +259,14 @@ int addWordsInArray(WORD* wordsInText, string fullText) {
 		}
 	}
 
+	//adds one more word to the array if the text string does not end with " "
 	if (fullText[fullText.size() - 1] != ' ') {
 
 		wordsInText[wordIndex].word = fullText.substr(firstLetter);
 		wordIndex++;
 	}
 
+	//checks if the words contain any symbols and if they do, it removes them
 	for (int i = 0; i < wordIndex; i++) {
 
 		for (int j = 0; j < 4; j++) {
@@ -273,7 +278,7 @@ int addWordsInArray(WORD* wordsInText, string fullText) {
 		}
 	}
 
-
+	//lowers all letters of all the words in the array
 	for (int i = 0; i < wordIndex; i++) {
 
 		for (int j = 0; j < wordsInText[i].word.size(); j++) {
@@ -283,14 +288,17 @@ int addWordsInArray(WORD* wordsInText, string fullText) {
 
 	}
 
+	//returns the size of array "wordsInText"
 	return wordIndex;
 }
 
 
+//counts something (e.g. sentences) by given characters
 int counting(string fullText, char symbols[], int size) {
 
 	int count = 0, check = 0;
 
+	//counts how many times the characters from the array symbols[] are present in the string
 	for (int i = 0; i < fullText.size(); i++) {
 
 		for (int j = 0; j < size; j++) {
@@ -302,6 +310,7 @@ int counting(string fullText, char symbols[], int size) {
 		}
 	}
 
+	//checks if the last element of the string is equal to each of the characters from the array symbols[] and if not, it adds 1 to "check"  
 	for (int j = 0; j < size; j++) {
 
 		if (fullText[fullText.size() - 1] != symbols[j]) {
@@ -310,19 +319,23 @@ int counting(string fullText, char symbols[], int size) {
 		}
 	}
 
+	//checks if the last element from the string is different from all the symbols and if it is, it adds 1 to "count"
 	if (check == size) {
 
 		count++;
 	}
 
+	//returns the number of the thing we are counting
 	return count;
 }
 
+//prints the number of words used in the text
 void wordCountMenu(int wordCount) {
 	cout << "The total amount of words in this text is: " << wordCount << endl;
 	cout << endl;
 }
 
+//prints the number of sentences used in the text
 void sentenceCountMenu(string fullText) {
 
 	char symbols[] = { '.','!','?' };
@@ -332,6 +345,7 @@ void sentenceCountMenu(string fullText) {
 	cout << endl;
 }
 
+//counts how many times a given  word is present in the text
 int specificWordCount(WORD *wordsInText, int wordCount, string wordForCheck) {
 	int searchedWordCount = 0;
 
@@ -344,6 +358,7 @@ int specificWordCount(WORD *wordsInText, int wordCount, string wordForCheck) {
 	return searchedWordCount;
 }
 
+//prints if a word (entered by the user) is present in the text or not
 void isWordInTextMenu(WORD *wordsInText, int wordCount) {
 	string wordForCheck;
 	cout << "Enter the word you want to search for: ";
@@ -361,6 +376,7 @@ void isWordInTextMenu(WORD *wordsInText, int wordCount) {
 	cout << endl;
 }
 
+//prints how many times a word (entered by the user) is present in the text
 void howManyTimesIsWordInTextMenu(WORD* wordsInText, int wordCount) {
 	string wordForCount;
 	cout << "Enter the word you want to know how many times is present in the text: ";
@@ -375,6 +391,7 @@ void howManyTimesIsWordInTextMenu(WORD* wordsInText, int wordCount) {
 	cout << endl;
 }
 
+//counts how many times each word in the text is present
 void countEachWordInText(WORD* wordsInText, int wordCount) {
 
 	for (int i = 0; i < wordCount; i++) {
@@ -394,6 +411,7 @@ void countEachWordInText(WORD* wordsInText, int wordCount) {
 
 }
 
+//prints how many times each word in the text is present
 void eachWordCountMenu(WORD* wordsInText, int wordCount) {
 	for (int i = 0; i < wordCount; i++) {
 		if (wordsInText[i].marked == false) {
@@ -403,6 +421,7 @@ void eachWordCountMenu(WORD* wordsInText, int wordCount) {
 	cout << endl;
 }
 
+//sorts the elements in the array "wordsInText" from most to least common word in the text
 void sortByCount(WORD* wordsInText, int wordCount) {
 	for (int i = 0; i < wordCount - 1; i++) {
 		for (int j = 0; j < wordCount - i - 1; j++) {
@@ -413,15 +432,38 @@ void sortByCount(WORD* wordsInText, int wordCount) {
 	}
 }
 
+//prints the most common words in the text
 void mostCommonWordsMenu(WORD* wordsInText, int wordCount) {
 	sortByCount(wordsInText, wordCount);
-	cout << "The three most common words in the text are: "<<endl;
-	for (int i = 0; i < 3; i++)
-		cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
+
+	int uniqueWordsCount = 0;
+
+	for (int i = 0; i < wordCount; i++) {
+		if (wordsInText[i].marked == false) {
+			uniqueWordsCount++;
+		}
+	}
+
+	cout << "The most common word/s in the text are: "<<endl;
+
+	//checks how many different words there are and chooses how many most common words to print
+	if (uniqueWordsCount == 1) {
+		for (int i = 0; i < 1; i++)
+			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
+	}
+	else if (uniqueWordsCount == 2) {
+		for (int i = 0; i < 2; i++)
+			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
+	}
+	else {
+		for (int i = 0; i < 3; i++)
+			cout << i + 1 << ". \"" << wordsInText[i].word << "\" (" << wordsInText[i].count << " time/s) " << endl;
+	}
 
 	cout << endl;
 }
 
+//serves for entering the text and choosing an option
 void textMenu() {
 
 	int option;
@@ -442,6 +484,7 @@ void textMenu() {
 
 	bool continueMenu = 0;
 
+	//prints the options from the text menu until the user chooses to return back to the main menu
 	while (continueMenu == 0) {
 		cout << "What do you want to know about this text? " << endl;
 		cout << endl;
@@ -616,6 +659,7 @@ bool riddlesMenu() {
 	return again;
 }
 
+//serves for choosing an option from the games menu
 void gamesMenu() {
 
 	int option;
@@ -624,6 +668,7 @@ void gamesMenu() {
 
 	bool continueMenu = 0;
 
+	//prints the options from the games menu until the user chooses to return back to the main menu
 	while (continueMenu == 0) {
 
 		cout << "Choose the game you want to play" << endl;
